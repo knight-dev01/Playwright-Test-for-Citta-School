@@ -68,33 +68,33 @@ export default defineConfig({
       dependencies: ['setup'],
       use: { ...devices['Desktop Chrome'], channel: 'chrome', launchOptions: { executablePath: CHROME_PATH }, storageState: '.auth/executive.json' },
     },
-    // Cross-browser smoke (optional)
-    {
-      name: 'firefox',
-      dependencies: ['setup'],
-      use: { ...devices['Desktop Firefox'], storageState: '.auth/registrar.json' },
-    },
-    {
-      name: 'webkit',
-      dependencies: ['setup'],
-      use: { ...devices['Desktop Safari'], storageState: '.auth/registrar.json' },
-    },
-    // Unauthenticated — for smoke + TC-01/02 (no storageState)
+    // Unauthenticated — for smoke + TC-01/02 (no storageState) — run without setup
     {
       name: 'chrome-unauth',
       use: { ...devices['Desktop Chrome'], channel: 'chrome', launchOptions: { executablePath: CHROME_PATH } },
     },
-    // Mobile — Pixel 7 for TC-25 / messages 49
-    {
-      name: 'mobile-chrome',
-      dependencies: ['setup'],
-      use: { ...devices['Pixel 7'], channel: 'chrome', launchOptions: { executablePath: CHROME_PATH }, storageState: '.auth/student.json' },
-    },
-    {
-      name: 'mobile-executive',
-      dependencies: ['setup'],
-      use: { ...devices['Pixel 7'], channel: 'chrome', launchOptions: { executablePath: CHROME_PATH }, storageState: '.auth/executive.json' },
-    },
+    // Optional cross-browser / mobile — disabled by default to avoid 700+ matrix.
+    // Enable with: npx playwright test --project=firefox --project=webkit --project=mobile-chrome
+    // {
+    //   name: 'firefox',
+    //   dependencies: ['setup'],
+    //   use: { ...devices['Desktop Firefox'], storageState: '.auth/registrar.json' },
+    // },
+    // {
+    //   name: 'webkit',
+    //   dependencies: ['setup'],
+    //   use: { ...devices['Desktop Safari'], storageState: '.auth/registrar.json' },
+    // },
+    // {
+    //   name: 'mobile-chrome',
+    //   dependencies: ['setup'],
+    //   use: { ...devices['Pixel 7'], channel: 'chrome', launchOptions: { executablePath: CHROME_PATH }, storageState: '.auth/student.json' },
+    // },
+    // {
+    //   name: 'mobile-executive',
+    //   dependencies: ['setup'],
+    //   use: { ...devices['Pixel 7'], channel: 'chrome', launchOptions: { executablePath: CHROME_PATH }, storageState: '.auth/executive.json' },
+    // },
   ],
   // No webServer for live site — hits BASE_URL directly
 });

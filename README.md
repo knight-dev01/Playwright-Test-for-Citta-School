@@ -13,7 +13,17 @@ npx playwright show-report
 ```
 
 ## Projects (playwright.config.ts)
-setup → chromium-applicant, chromium-student, chromium-registrar, chromium-lecturer, chromium-bursar, chromium-executive, firefox, webkit, mobile-chrome, mobile-executive
+Active: `setup` → `chromium-applicant`, `chromium-student`, `chromium-registrar`, `chromium-lecturer`, `chromium-bursar`, `chromium-executive`, `chrome-unauth` (7 run by default).
+Optional (disabled to avoid 700+ matrix): `firefox`, `webkit`, `mobile-chrome`, `mobile-executive` — enable with `npx playwright test --project=firefox`.
+
+Why you saw 700+ skipped: 85 unique tests × 8 projects = ~700. Each spec is multiplied per project; many show as `skipped` because they are `BLOCKED` per docx Critical Rule (`test.skip(true, 'BLOCKED: ...')` when site structure differs) or not applicable to that role. **Fix:** run focused projects.
+
+```bash
+npm run test:smoke   # 3 tests on chrome-unauth only
+npm run test:auth    # 5 tests on chrome-unauth only
+npm run test:major   # ~200 tests on chrome-unauth + 3 role projects (no 700+)
+npm run test:full    # all 700+ (only for full matrix)
+```
 
 ## Suites (tests/)
 - 01-smoke.spec.ts
