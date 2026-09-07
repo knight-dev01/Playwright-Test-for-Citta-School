@@ -1,0 +1,29 @@
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+Evidence/
+*.png
+*.webm
+*.zip
+
+# Auth states
+/.auth/
+
+# Env
+.env
+!.env.example
+
+# Node
+node_modules/
+dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+.opencode/
+docx_full.txt
+docx_dump.txt

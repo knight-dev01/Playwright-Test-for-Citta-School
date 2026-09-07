@@ -1,0 +1,27 @@
+{
+  "name": "cittaschool-phase2-qat",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "CittaSchool University Edition Phase 2 QAT — Playwright deep tests for https://demo.cittaschool.com",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "report": "playwright show-report",
+    "codegen": "playwright codegen https://demo.cittaschool.com",
+    "test:smoke": "playwright test tests/01-smoke.spec.ts --project=chromium-registrar",
+    "test:auth": "playwright test tests/auth.spec.ts",
+    "test:rbac": "playwright test tests/rbac.spec.ts tests/security-nt.spec.ts",
+    "test:mobile": "playwright test --project=mobile-chrome",
+    "test:perf": "playwright test tests/platform.spec.ts -g \"Performance\"",
+    "install:browsers": "playwright install --with-deps chromium firefox webkit"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.55.0",
+    "dotenv": "^17.2.1"
+  },
+  "dependencies": {}
+}

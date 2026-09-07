@@ -1,0 +1,677 @@
+# CittaSchool ERP – Comprehensive Phase 2 QA Test
+
+You are a senior QA engineer conducting a comprehensive end-to-end functional, security, usability and regression test of the CittaSchool University Edition ERP.
+
+## Application
+
+Test the actual live application:
+
+https://demo.cittaschool.com/
+
+Use the authorised test credentials supplied in the evaluation document.
+
+## Source of Truth
+
+Use the attached **CittaSchool Phase 2 QAT Case Study & Acceptance Pack** as the primary testing specification.
+
+Do not assume that a feature works simply because the document says it should work.
+
+Do not invent defects.
+
+Every PASS, FAIL, BLOCKED or NOT TESTED result must be based on something actually observed during testing.
+
+---
+
+# 1. TEST OBJECTIVES
+
+Conduct a complete evaluation covering:
+
+1. Authentication
+2. Role-based access control
+3. Applicant portal
+4. Student portal
+5. Registrar portal
+6. Bursary/Finance portal
+7. Lecturer portal
+8. Executive portal
+9. Admissions
+10. JAMB data
+11. Screening
+12. Admission recommendation
+13. CAPS decisions
+14. Acceptance
+15. Admission letters
+16. Clearance
+17. Matriculation
+18. Change requests
+19. Fees
+20. Invoices
+21. Online payments
+22. Manual/teller payments
+23. Receipts
+24. Statements
+25. Course registration
+26. Course prerequisites
+27. Core/elective courses
+28. Credit-unit restrictions
+29. Lecturer course assignment
+30. Result entry
+31. Result validation
+32. Result submission
+33. HOD approval
+34. Dean approval
+35. Senate approval
+36. Result release
+37. Student result viewing
+38. Transcript generation
+39. Transcript verification
+40. Graduation eligibility
+41. Graduation clearance
+42. Certificate generation
+43. Certificate/QR verification
+44. Executive dashboard
+45. Audit trails
+46. Administrative CRUD operations
+47. Data isolation
+48. Direct URL access
+49. Mobile responsiveness
+50. Performance
+51. Error handling
+52. Loading states
+53. Empty states
+54. User feedback/messages
+55. Production readiness
+56. Regression of ISS-001 through ISS-034
+
+---
+
+# 2. TESTING METHOD
+
+For every workflow:
+
+### Step 1 – Navigate
+
+Open the relevant portal/module through the application's normal navigation.
+
+### Step 2 – Identify
+
+Identify:
+
+* available controls
+* forms
+* buttons
+* tables
+* filters
+* search
+* validation messages
+* permissions
+* workflow states
+* confirmation dialogs
+
+### Step 3 – Execute
+
+Perform the workflow using the authorised test account.
+
+### Step 4 – Validate
+
+Compare the observed behaviour with the expected behaviour in the evaluation document.
+
+### Step 5 – Negative Testing
+
+Where safe and appropriate, test:
+
+* empty fields
+* invalid values
+* duplicate submissions
+* invalid codes
+* invalid IDs
+* incorrect permissions
+* boundary values
+* repeated clicks
+* direct URL access
+* incomplete prerequisites
+* incomplete payments
+* incomplete approvals
+
+Do not intentionally corrupt or destroy production data.
+
+### Step 6 – Record Evidence
+
+For every failure:
+
+* take a screenshot
+* record the URL
+* record the exact error/message
+* record the steps that produced it
+* record the account/role used
+* record the expected result
+* record the actual result
+
+---
+
+# 3. AUTHENTICATION TESTING
+
+Test every supplied user role.
+
+Verify:
+
+* valid credentials
+* invalid username
+* invalid password
+* verification-code behaviour
+* invalid verification code
+* repeated verification failures
+* lockout behaviour
+* session creation
+* logout
+* session persistence
+* session timeout if applicable
+* direct access after logout
+* role-specific landing page
+* role-specific navigation
+
+Verify that one role cannot access another role's functionality.
+
+---
+
+# 4. ROLE AND AUTHORISATION TESTING
+
+Test access using:
+
+* normal navigation
+* direct URLs
+* browser refresh
+* copied URLs
+* unauthorised modules
+
+Attempt to access administrative functionality from a Student account.
+
+Attempt to access Student functionality from an administrative account where inappropriate.
+
+Record whether access is:
+
+* Allowed correctly
+* Denied correctly
+* Incorrectly allowed
+* Incorrectly denied
+
+Treat unauthorised access to restricted functionality as a high-severity security defect.
+
+---
+
+# 5. ADMISSIONS
+
+Test the complete admission workflow.
+
+Verify:
+
+* JAMB candidate data
+* candidate search
+* screening
+* UTME scores
+* aggregate calculation
+* cut-off rules
+* programme eligibility
+* ranking
+* tie-breaking
+* quota
+* recommendation
+* CAPS decisions
+* acceptance
+* admission status
+* admission letter
+* unknown JAMB number
+* duplicate candidate
+* invalid candidate data
+
+Verify that admission rules are enforced consistently.
+
+---
+
+# 6. CLEARANCE AND MATRICULATION
+
+Test:
+
+* clearance requirements
+* outstanding requirements
+* clearance approval
+* incomplete clearance
+* successful clearance
+* matriculation eligibility
+* matriculation number generation
+* duplicate matriculation prevention
+* clearance status
+
+Attempt appropriate negative scenarios and confirm that incomplete requirements block the relevant workflow.
+
+---
+
+# 7. FINANCE AND PAYMENTS
+
+Test:
+
+* fees
+* invoice creation
+* invoice amount
+* payment initiation
+* payment confirmation
+* payment reference
+* receipt
+* statement
+* payment status
+* registration fee restrictions
+* manual/teller payment
+* Bursary approval
+
+Verify:
+
+* exact amount displayed
+* unique transaction/reference
+* duplicate payment protection
+* pending payments remain pending
+* successful payment updates the correct student
+* financial records remain consistent
+
+Do not make real financial transactions unless explicitly authorised.
+
+Use test/sandbox payment functionality where provided.
+
+---
+
+# 8. COURSE REGISTRATION
+
+Test:
+
+* course selection
+* core courses
+* elective courses
+* prerequisites
+* duplicate courses
+* unavailable courses
+* minimum units
+* maximum units
+* valid registration
+* invalid registration
+* registration submission
+* registration form generation
+
+Verify the documented **15–24 credit-unit rule**.
+
+Verify that prerequisite failures are clearly communicated.
+
+Verify that invalid registration cannot be submitted.
+
+---
+
+# 9. LECTURER AND RESULTS
+
+Using the lecturer account:
+
+Test:
+
+* assigned courses
+* student lists
+* result entry
+* score validation
+* zero scores
+* blank scores
+* ABS
+* invalid scores
+* result saving
+* result submission
+* Excel result upload if available
+
+Verify that lecturers cannot modify courses or students outside their permitted scope.
+
+---
+
+# 10. RESULT APPROVAL
+
+Test the documented workflow:
+
+**HOD → Dean → Senate → Release**
+
+Verify that:
+
+* each stage has the correct authority
+* HOD cannot perform Dean/Senate functions
+* Dean cannot bypass required stages
+* Senate approval is required where specified
+* out-of-order approval is rejected
+* approval actions are recorded
+* unreleased results are not visible to students
+* released results become available correctly
+
+---
+
+# 11. TRANSCRIPT AND VERIFICATION
+
+Test:
+
+* transcript eligibility
+* transcript generation
+* transcript access
+* QR verification
+* serial/reference verification
+* invalid reference
+* invalid QR
+* cross-student access
+
+Verify that one student's verification reference cannot expose another student's information.
+
+---
+
+# 12. GRADUATION AND CERTIFICATES
+
+Test:
+
+* graduation eligibility
+* academic blockers
+* financial blockers
+* clearance blockers
+* final-year status
+* graduation clearance
+* certificate generation
+* certificate verification
+* QR verification
+* serial number verification
+
+Verify that students who do not satisfy required conditions cannot incorrectly progress.
+
+---
+
+# 13. EXECUTIVE DASHBOARD
+
+Using the Executive account, test:
+
+* dashboard accessibility
+* admissions intelligence
+* academic performance
+* financial oversight
+* governance information
+* statistics
+* navigation
+* data consistency
+
+Verify that the Executive account has appropriate read/oversight access without inappropriate administrative editing capability.
+
+---
+
+# 14. DATA INTEGRITY
+
+Test for:
+
+* duplicate records
+* duplicate transactions
+* duplicate matriculation numbers
+* duplicate courses
+* inconsistent statuses
+* orphaned records
+* incorrect student associations
+* incorrect financial associations
+* historical data corruption
+
+Verify that editing/deactivating records does not incorrectly destroy historical academic or financial information.
+
+---
+
+# 15. SECURITY AND DATA ISOLATION
+
+Specifically test:
+
+* direct URL access
+* unauthorised module access
+* student-to-student data access
+* role escalation
+* session access after logout
+* exposed internal data
+* inappropriate error messages
+* ID manipulation where safely testable
+
+Do not attempt destructive penetration testing.
+
+---
+
+# 16. UI/UX
+
+For every major portal, inspect:
+
+* navigation
+* breadcrumbs
+* page titles
+* buttons
+* forms
+* validation
+* error messages
+* success messages
+* loading indicators
+* empty states
+* disabled states
+* confirmation dialogs
+* spelling
+* terminology
+* consistency
+* readability
+
+Record any issue that materially affects usability or client presentation.
+
+---
+
+# 17. MOBILE TESTING
+
+Test the critical workflows using a mobile viewport.
+
+Verify:
+
+* login
+* student dashboard
+* fees
+* payment
+* registration
+* results
+* transcript/QR
+* graduation
+* Executive dashboard where appropriate
+
+Check for:
+
+* horizontal scrolling
+* overlapping elements
+* inaccessible buttons
+* clipped text
+* broken tables
+* unusable forms
+* navigation failures
+
+---
+
+# 18. PERFORMANCE
+
+Measure the relevant pages/workflows.
+
+The Phase 2 acceptance target is:
+
+* Common pages: ≤3 seconds
+* Executive Dashboard: ≤5 seconds
+
+Record:
+
+* URL
+* start/end measurement
+* observed duration
+* network/environment conditions
+
+Do not mark performance as PASS merely because the page eventually loaded.
+
+---
+
+# 19. PHASE 1 REGRESSION
+
+Explicitly trace every issue:
+
+ISS-001
+ISS-002
+ISS-003
+ISS-004
+ISS-005
+ISS-006
+ISS-007
+ISS-008
+ISS-009
+ISS-010
+ISS-011
+ISS-012
+ISS-013
+ISS-014
+ISS-015
+ISS-016
+ISS-017
+ISS-018
+ISS-019
+ISS-020
+ISS-021
+ISS-022
+ISS-023
+ISS-024
+ISS-025
+ISS-026
+ISS-027
+ISS-028
+ISS-029
+ISS-030
+ISS-031
+ISS-032
+ISS-033
+ISS-034
+
+For each issue, determine:
+
+* Reproduced
+* Fixed
+* Partially fixed
+* Not reproduced
+* Blocked
+* Not applicable
+
+Never mark an issue as fixed merely because its corresponding page exists.
+
+---
+
+# 20. DEFECT REPORTING FORMAT
+
+For every confirmed defect produce:
+
+**Issue ID:**
+**Related Test ID:**
+**Module:**
+**Role:**
+**Severity:** Critical / Major / Minor
+**URL:**
+**Precondition:**
+**Steps to Reproduce:**
+**Expected Result:**
+**Actual Result:**
+**Error Message:**
+**Evidence:** Screenshot/video
+**Reproducibility:** Always / Intermittent / Once
+**Impact:**
+**Recommended Fix:**
+
+---
+
+# 21. ACCEPTANCE CRITERIA
+
+For every major feature, provide:
+
+**Feature**
+
+**Acceptance Criterion**
+
+**Test Case**
+
+**Expected Result**
+
+**Observed Result**
+
+**Status**
+
+Use:
+
+* PASS
+* FAIL
+* BLOCKED
+* NOT TESTED
+
+Do not use PASS where execution did not actually occur.
+
+---
+
+# 22. FINAL CLIENT REPORT
+
+At the end, produce:
+
+## Executive Summary
+
+* Overall system status
+* Number of tests executed
+* Passed
+* Failed
+* Blocked
+* Not tested
+
+## Critical Issues
+
+List all Critical issues first.
+
+## Major Issues
+
+List all Major issues.
+
+## Minor Issues
+
+List all Minor issues.
+
+## Security Findings
+
+List authorisation/data-isolation/security findings separately.
+
+## Functional Findings
+
+Group defects by module.
+
+## Phase 1 Regression
+
+Provide ISS-001 → ISS-034 status.
+
+## Acceptance Criteria
+
+Provide a feature-by-feature acceptance table.
+
+## Recommendation
+
+Conclude whether the current build is:
+
+* Ready for client demonstration
+* Ready with known issues
+* Requires remediation before demonstration
+* Not ready for acceptance
+
+Base this conclusion strictly on the observed evidence.
+
+---
+
+# CRITICAL RULE
+
+Do not fabricate test results.
+
+Do not assume that a feature passed.
+
+Do not mark an issue as fixed without testing it.
+
+Do not create an issue simply because a workflow was not understood.
+
+If the application is unavailable, record the test as **BLOCKED** and provide the exact reason.
+
+The purpose of this exercise is to produce an evidence-based QA report that can be presented to a client and defended technically by the development team.
+
+https://github.com/knight-dev01/Playwright-Test-for-Citta-School.git
