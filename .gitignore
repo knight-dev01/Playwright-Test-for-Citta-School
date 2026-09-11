@@ -36,3 +36,12 @@ CittaSchool_Boss*.pptx
 CittaSchool_Architecture*.md
 CittaSchool_Master_Deck*.pptx
 
+
+# Project docs — local only, not for publish (keep code only on remote)
+messages.txt
+*.docx
+*.pptx
+CLIENT_DEMO_FRIDAY.md
+DEMO_FRIDAY.md
+playwright-report/
+
