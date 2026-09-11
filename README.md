@@ -1,6 +1,6 @@
-# CittaSchool Phase 2 QAT — Playwright Deep Tests
+# Demo Website — Playwright E2E Tests
 
-Target: `https://demo.cittaschool.com` (production mode, typed sign-in + 123456)
+Target: `https://demo.cittaschool.com` (typed sign-in + 123456)
 
 ## Quick Start
 ```bash
@@ -64,12 +64,8 @@ explorer playwright-report\index.html   # Windows
 explorer Evidence\                      # per-FAIL screenshots
 ```
 
-**Source of truth & decks (committed):**
-* Case study: [`CittaSchool_Phase2_QAT_Case_Study-2.docx`](./CittaSchool_Phase2_QAT_Case_Study-2.docx) — Sec. 1–9, TC-01..27, NT-01..23, ISS-001..034
-* Test spec: [`messages.txt`](./messages.txt) — 55 objectives + verbatim defect format
-* Master deck: [`CittaSchool_Master_Deck_ALL.pptx`](./CittaSchool_Master_Deck_ALL.pptx) — 16 slides (Boss 5 + 3Pager 3 + FRIDAY 4 + Client 4)
-* Client handout: [`CLIENT_DEMO_FRIDAY.md`](./CLIENT_DEMO_FRIDAY.md) / internal: [`DEMO_FRIDAY.md`](./DEMO_FRIDAY.md)
+**Env & Reports:**
 * Env template: [`.env.example`](./.env.example) — copy to `.env` (gitignored)
-* Repo: <https://github.com/knight-dev01/Playwright-Test-for-Citta-School.git>
+* Reports: `playwright-report/index.html` — run `npx playwright show-report`
 
-> **Tip:** After a run, `playwright-report/index.html` is the single link to share with your boss/client — it contains videos, screenshots, and traces in one page. For `BLOCKED` (site down), attach `Evidence/` + `test-results/` as ZIP.
+> **Tip:** After a run, `playwright-report/index.html` contains videos, screenshots, and traces in one page. For `BLOCKED` (site down), attach `Evidence/` + `test-results/` as ZIP.
