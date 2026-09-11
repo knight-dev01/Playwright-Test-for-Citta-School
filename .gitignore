@@ -29,3 +29,10 @@ docx_full.txt
 docx_dump.txt
 ~$*
 test_simple.pptx
+
+# Boss pack — local only, do not publish
+CittaSchool_Boss*.xlsx
+CittaSchool_Boss*.pptx
+CittaSchool_Architecture*.md
+CittaSchool_Master_Deck*.pptx
+
